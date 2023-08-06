@@ -1,10 +1,12 @@
 name: paypal_checkout_sdk
 description: Best and easy way to INTEGRATE PayPal checkout in Flutter application
-version: 1.0.0
+version: 1.0.0+1
 homepage: https://github.com/kuloud/paypal_checkout_sdk
 
+publish_to: https://pub.dartlang.org
+
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: '>=2.18.6 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

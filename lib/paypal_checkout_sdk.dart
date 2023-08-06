@@ -90,7 +90,7 @@ class PaypalCheckoutState extends State<PaypalCheckout> {
         }
       } catch (e) {
         widget.onError!(e);
-        print('exception: $e');
+        debugPrint('exception: $e');
       }
     });
   }
@@ -112,8 +112,8 @@ class PaypalCheckoutState extends State<PaypalCheckout> {
             InAppWebView(
               initialUrlRequest: URLRequest(url: Uri.parse(checkoutUrl!)),
               initialOptions: InAppWebViewGroupOptions(
-                android: AndroidInAppWebViewOptions(textZoom: 120),
-              ),
+                  // android: AndroidInAppWebViewOptions(textZoom: 120),
+                  ),
               onWebViewCreated: (InAppWebViewController controller) {
                 webView = controller;
               },
@@ -121,10 +121,10 @@ class PaypalCheckoutState extends State<PaypalCheckout> {
                 InAppWebViewController? controller,
                 Uri? requestURL,
               ) {
-                print('-------------${requestURL.toString()}');
+                debugPrint('-------------${requestURL.toString()}');
                 if (widget.returnURL!.contains(requestURL!.path)) {
                   final uri = requestURL;
-                  final payerID = uri!.queryParameters['PayerID'];
+                  final payerID = uri.queryParameters['PayerID'];
                   if (payerID != null) {
                     services
                         .executePayment(executeUrl, payerID, accessToken)
@@ -140,8 +140,8 @@ class PaypalCheckoutState extends State<PaypalCheckout> {
                   }
                 }
 
-                if (widget.cancelURL!.contains(requestURL!.path)) {
-                  print("cancelURL");
+                if (widget.cancelURL!.contains(requestURL.path)) {
+                  debugPrint("cancelURL");
                   widget.onCancel!();
                   Navigator.of(context).pop();
                 }
